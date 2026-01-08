@@ -1,0 +1,6 @@
+% Predicado para encontrar el último elemento de una lista
+% ultimo_elemento(+Lista, -Elemento)
+ultimo_elemento([Ultimo], Ultimo).  % Caso base: lista con un solo elemento
+
+ultimo_elemento([_|Cola], Ultimo) :-  % Caso recursivo
+    ultimo_elemento(Cola, Ultimo).
