@@ -1,0 +1,23 @@
+% Predicado para filtrar elementos mayores que N
+% filtrar_mayores(+ListaOriginal, +N, -ListaFiltrada)
+filtrar_mayores([], _, []).  % Caso base: lista vacía
+
+filtrar_mayores([Cabeza|Cola], N, [Cabeza|Resultado]) :-
+    % Si la cabeza es mayor que N, la incluimos en el resultado
+    Cabeza > N,
+    !,  % Corte para evitar backtracking innecesario
+    filtrar_mayores(Cola, N, Resultado).
+
+filtrar_mayores([Cabeza|Cola], N, Resultado) :-
+    % Si la cabeza NO es mayor que N, la omitimos
+    Cabeza =< N,
+    filtrar_mayores(Cola, N, Resultado).
+
+% Versión alternativa sin corte (más declarativa)
+filtrar_mayores2([], _, []).
+filtrar_mayores2([Cabeza|Cola], N, [Cabeza|Resultado]) :-
+    Cabeza > N,
+    filtrar_mayores2(Cola, N, Resultado).
+filtrar_mayores2([Cabeza|Cola], N, Resultado) :-
+    Cabeza =< N,
+    filtrar_mayores2(Cola, N, Resultado).
