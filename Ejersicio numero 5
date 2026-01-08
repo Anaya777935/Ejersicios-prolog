@@ -1,0 +1,53 @@
+% Base de conocimiento: hechos sobre la familia
+progenitor(juan, maria).
+progenitor(juan, pedro).
+progenitor(juan, ana).
+progenitor(luisa, maria).
+progenitor(luisa, pedro).
+progenitor(luisa, ana).
+progenitor(carlos, luis).
+progenitor(carlos, carla).
+progenitor(elena, luis).
+progenitor(elena, carla).
+
+% Hechos sobre género
+hombre(juan).
+hombre(pedro).
+hombre(carlos).
+hombre(luis).
+mujer(luisa).
+mujer(maria).
+mujer(ana).
+mujer(elena).
+mujer(carla).
+
+% Predicado para verificar si dos personas son hermanos
+% es_hermano(+X, +Y) o es_hermano(?X, ?Y)
+es_hermano(X, Y) :-
+    % X e Y comparten al menos un progenitor
+    progenitor(P, X),
+    progenitor(P, Y),
+    % Pero no son la misma persona
+    X \= Y.
+
+% Predicado específico para hermano (género masculino)
+hermano(X, Y) :-
+    es_hermano(X, Y),
+    hombre(X).
+
+% Predicado específico para hermana (género femenino)
+hermana(X, Y) :-
+    es_hermano(X, Y),
+    mujer(X).
+
+% Predicado para obtener todos los hermanos de una persona
+hermanos_de(Persona, Hermanos) :-
+    findall(H, (es_hermano(Persona, H), H \= Persona), Hermanos).
+
+% Predicado para verificar si dos personas son hermanos completos (mismo padre y madre)
+hermano_completo(X, Y) :-
+    % Comparten ambos progenitores
+    progenitor(Padre, X), progenitor(Padre, Y),
+    progenitor(Madre, X), progenitor(Madre, Y),
+    Padre \= Madre,  % Asegurar que son personas diferentes
+    X \= Y.
