@@ -1,0 +1,17 @@
+% Predicado principal para invertir una lista
+% invertir(+ListaOriginal, -ListaInvertida)
+invertir(Lista, Invertida) :-
+    invertir_aux(Lista, [], Invertida).
+
+% Caso base: cuando la lista original está vacía,
+% la lista acumuladora contiene el resultado invertido
+invertir_aux([], Acumulador, Acumulador).
+
+% Caso recursivo: tomar el primer elemento de la lista original
+% y agregarlo al frente del acumulador, luego procesar el resto
+invertir_aux([Cabeza|Cola], Acumulador, Resultado) :-
+    invertir_aux(Cola, [Cabeza|Acumulador], Resultado).
+
+% Versión alternativa usando el predicado reverse/2 incorporado
+% (solo para referencia, ya que reverse/2 es un predicado estándar)
+% invertir(Lista, Invertida) :- reverse(Lista, Invertida).
