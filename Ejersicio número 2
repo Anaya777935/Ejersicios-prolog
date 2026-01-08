@@ -1,0 +1,22 @@
+% Predicado principal para sumar elementos de una lista
+% sumar_lista(+Lista, -SumaTotal)
+sumar_lista(Lista, SumaTotal) :-
+    sumar_lista_aux(Lista, 0, SumaTotal).
+
+% Caso base: cuando la lista está vacía,
+% el acumulador contiene la suma total
+sumar_lista_aux([], Acumulador, Acumulador).
+
+% Caso recursivo: sumar el elemento actual al acumulador
+% y procesar el resto de la lista
+sumar_lista_aux([Cabeza|Cola], Acumulador, Resultado) :-
+    number(Cabeza),  % Verifica que sea un número
+    NuevoAcumulador is Acumulador + Cabeza,
+    sumar_lista_aux(Cola, NuevoAcumulador, Resultado).
+
+% Versión alternativa más compacta
+sumar_lista2([], 0).
+sumar_lista2([Cabeza|Cola], Suma) :-
+    number(Cabeza),
+    sumar_lista2(Cola, SumaCola),
+    Suma is Cabeza + SumaCola.
