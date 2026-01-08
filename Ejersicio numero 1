@@ -12,6 +12,4 @@ invertir_aux([], Acumulador, Acumulador).
 invertir_aux([Cabeza|Cola], Acumulador, Resultado) :-
     invertir_aux(Cola, [Cabeza|Acumulador], Resultado).
 
-% Versión alternativa usando el predicado reverse/2 incorporado
-% (solo para referencia, ya que reverse/2 es un predicado estándar)
-% invertir(Lista, Invertida) :- reverse(Lista, Invertida).
+
